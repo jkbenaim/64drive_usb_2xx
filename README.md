@@ -46,13 +46,10 @@ Copy these files into the project, then run ```make ```.
 
 ## Missing features
 
-This port is missing two features from the original Windows version:
+This port is missing just one feature from the original Windows version:
 
   1. The original Windows version has code for a filepicker. I don't
      think it was actually used. I commented it out.
-     
-  2. The original Windows version has a sweet text-mode progress bar.
-     I broke it.
      
      
 ## Troubleshooting
