@@ -8,7 +8,8 @@
 #include "helper.h"
 #include "inttypes.h"
 // #include <io.h>
-#define LONGLONG int64_t
+// #define LONGLONG int64_t
+#include <time.h>
 
 u8		buffer[CHUNK_SIZE];
 
@@ -60,11 +61,11 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 	int		trunc_flag = 0;
 	int		i; 
 	int		chunk = 0;
-	int64_t	        time_start;
-	int64_t 	time_stop;
-	int64_t	        time_freq;
-	LONGLONG		time_diff;
-	double			time_duration;
+        struct timespec time_start;
+        struct timespec time_stop;
+        double          time_duration;
+        time_t          time_diff_seconds;
+        long            time_diff_nanoseconds;
 	dev_cmd_resp_t	r;
   
 	// make sure handle is valid
@@ -84,9 +85,9 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 	if(c->verbose) _printf(info[INFO_OPT_CHUNK], chunk);
 
 	// get initial time count
-        // TODO: port this to Linux
 // 	QueryPerformanceFrequency(&time_freq);
 // 	QueryPerformanceCounter(&time_start);
+        clock_gettime(CLOCK_MONOTONIC, &time_start);
 
 	while(1){
 		if(bytes_left >= chunk) 
@@ -141,12 +142,13 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 		c->status = FT_GetStatus(c->handle, &c->bytes_read, &c->bytes_written, &c->event_status);
 	}
 	// stop the timer
-	// TODO: port this to Linux
 // 	QueryPerformanceCounter(&time_stop);
-	time_diff = time_stop - time_start;
-	// get the difference of the timer
-        // TODO: uncomment this for Linux
-// 	time_duration = ((double) time_diff * 1000.0 / (double) time_freq) / 1000.0f;
+        clock_gettime(CLOCK_MONOTONIC, &time_stop);
+        // get the difference of the timer
+        time_diff_seconds = time_stop.tv_sec - time_start.tv_sec;
+        time_diff_nanoseconds = time_stop.tv_nsec - time_start.tv_nsec;
+	time_duration = (double)time_diff_seconds + (double)(time_diff_nanoseconds/1000000000.0f);
+        
 	// erase progress bar
 	prog_erase();
 	if(c->verbose && trunc_flag) 
