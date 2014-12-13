@@ -9,17 +9,6 @@
 #include "inttypes.h"
 // #include <io.h>
 #define LONGLONG int64_t
-typedef union _LARGE_INTEGER {
-  struct {
-    DWORD LowPart;
-    LONG  HighPart;
-  };
-  struct {
-    DWORD LowPart;
-    LONG  HighPart;
-  } u;
-  LONGLONG QuadPart;
-} LARGE_INTEGER, *PLARGE_INTEGER;
 
 u8		buffer[CHUNK_SIZE];
 
@@ -71,9 +60,9 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 	int		trunc_flag = 0;
 	int		i; 
 	int		chunk = 0;
-	LARGE_INTEGER	time_start;
-	LARGE_INTEGER	time_stop;
-	LARGE_INTEGER	time_freq;
+	int64_t	        time_start;
+	int64_t 	time_stop;
+	int64_t	        time_freq;
 	LONGLONG		time_diff;
 	double			time_duration;
 	dev_cmd_resp_t	r;
@@ -154,10 +143,10 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 	// stop the timer
 	// TODO: port this to Linux
 // 	QueryPerformanceCounter(&time_stop);
-	time_diff = time_stop.QuadPart - time_start.QuadPart;
+	time_diff = time_stop - time_start;
 	// get the difference of the timer
         // TODO: uncomment this for Linux
-// 	time_duration = ((double) time_diff * 1000.0 / (double) time_freq.QuadPart) / 1000.0f;
+// 	time_duration = ((double) time_diff * 1000.0 / (double) time_freq) / 1000.0f;
 	// erase progress bar
 	prog_erase();
 	if(c->verbose && trunc_flag) 
