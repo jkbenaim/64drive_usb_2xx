@@ -58,9 +58,11 @@ void prog_draw(u32 amount, u32 total)
 	int blocks_done = (int)(((float)amount / (float)total)*64.0f);
 	int blocks_left = 64-blocks_done;
 	int i;
-	printf("\r   ");
-	for(i = 0; i < blocks_done; i++) printf("\xdb");
-	for(i = 0; i < blocks_left; i++) printf("\xb0");
+	printf("\r   [");
+	for(i = 0; i < blocks_done; i++) printf("=");
+	for(i = 0; i < blocks_left; i++) printf(".");
+        printf("]");
+        fflush(stdout);
 }
 
 void prog_erase()
