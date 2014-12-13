@@ -8,7 +8,7 @@
 #include "helper.h"
 #include "pkg/package.h"
 #include "pkg/pkg_cnt.h"
-#include <io.h>
+// #include <io.h>
 
 u8		buffer[CHUNK_SIZE];
 
@@ -166,7 +166,7 @@ void upgrade_firm(ftdi_context_t *c)
 	if(c->verbose) _printf("Starting firmware upgrade process...");
 	device_sendcmd(c, &r, DEV_CMD_UPGRADE, 0, 0, 0, 0, 0);
 	while(1){
-		Sleep(100);
+		usleep(100000);
 		resp = upgrade_get_report(c) & 0xf;
 
 		printf("\r");
@@ -226,7 +226,7 @@ void upgrade_bootld(ftdi_context_t *c, u8 *data, u32 size)
 	device_sendcmd(c, &r, DEV_CMD_PI_WR_BL, 2, 0, 0, 0x5555*2, 0xAA00 << 8);
 	device_sendcmd(c, &r, DEV_CMD_PI_WR_BL, 2, 0, 0, 0x2AAA*2, 0x5500 << 8);
 	device_sendcmd(c, &r, DEV_CMD_PI_WR_BL, 2, 0, 0, 0x5555*2, 0x1000 << 8);
-	Sleep(2000);
+	sleep(2);
 	printf("\r");
 	_printf("Writing data...          ");
 

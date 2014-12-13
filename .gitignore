@@ -1,0 +1,5 @@
+64drive_usb
+*.o
+WinTypes.h
+ftd2xx.h
+libftd2xx.a

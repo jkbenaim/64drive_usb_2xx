@@ -6,7 +6,20 @@
 #include "image.h"
 #include "device.h"
 #include "helper.h"
-#include <io.h>
+#include "inttypes.h"
+// #include <io.h>
+#define LONGLONG int64_t
+typedef union _LARGE_INTEGER {
+  struct {
+    DWORD LowPart;
+    LONG  HighPart;
+  };
+  struct {
+    DWORD LowPart;
+    LONG  HighPart;
+  } u;
+  LONGLONG QuadPart;
+} LARGE_INTEGER, *PLARGE_INTEGER;
 
 u8		buffer[CHUNK_SIZE];
 
@@ -82,8 +95,9 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 	if(c->verbose) _printf(info[INFO_OPT_CHUNK], chunk);
 
 	// get initial time count
-	QueryPerformanceFrequency(&time_freq);
-	QueryPerformanceCounter(&time_start);
+        // TODO: port this to Linux
+// 	QueryPerformanceFrequency(&time_freq);
+// 	QueryPerformanceCounter(&time_start);
 
 	while(1){
 		if(bytes_left >= chunk) 
@@ -138,10 +152,12 @@ void image_transfer(FILE *fp, ftdi_context_t *c, u8 dump, u8 type, u32 addr, u32
 		c->status = FT_GetStatus(c->handle, &c->bytes_read, &c->bytes_written, &c->event_status);
 	}
 	// stop the timer
-	QueryPerformanceCounter(&time_stop);
+	// TODO: port this to Linux
+// 	QueryPerformanceCounter(&time_stop);
 	time_diff = time_stop.QuadPart - time_start.QuadPart;
 	// get the difference of the timer
-	time_duration = ((double) time_diff * 1000.0 / (double) time_freq.QuadPart) / 1000.0f;
+        // TODO: uncomment this for Linux
+// 	time_duration = ((double) time_diff * 1000.0 / (double) time_freq.QuadPart) / 1000.0f;
 	// erase progress bar
 	prog_erase();
 	if(c->verbose && trunc_flag) 

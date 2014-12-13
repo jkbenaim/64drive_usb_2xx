@@ -4,14 +4,14 @@
 
 #pragma once
 
-#ifndef _WIN32_WINNT           
-#define _WIN32_WINNT 0x0500
-#endif
+// #ifndef _WIN32_WINNT           
+// #define _WIN32_WINNT 0x0500
+// #endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
+// #include <windows.h>
 
 #ifndef DEBUG
 #define FTD2XX_EXPORTS	// used for statically linking FTDI
@@ -101,5 +101,6 @@ typedef struct {
 
 // prototypes
 //
-extern void parse_args(game_files_t *g, int argc, char *argv[]);
+// extern void parse_args(game_files_t *g, int argc, char *argv[]);
+extern void parse_args(game_files_t *g, upgrade_files_t *u, int argc, char *argv[]);
 extern void invalid_args();

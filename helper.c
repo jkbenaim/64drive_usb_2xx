@@ -4,6 +4,8 @@
 
 #include "usb.h"
 #include "helper.h"
+#include <stdarg.h>
+#define MAX_PATH 260
 
 char	*compile_date = __TIMESTAMP__;
 
@@ -15,28 +17,28 @@ u32 swap_endian(u32 val)
 		   ((val>>24) );
 }
 
-void image_pick(char *filename)
-{
-	static TCHAR szFilter[] = TEXT ("Images (*.z64, *.v64, *.bin, *.rom,)\0*.z64;*.v64;*.bin;*.rom;\0All Files\0*.*;\0\0");
-	static TCHAR szFileName [MAX_PATH], szTitleName [MAX_PATH];
-	static OPENFILENAME ofn;
-	memset(&ofn, 0, sizeof (OPENFILENAME));
-
-	ofn.lStructSize       = sizeof (OPENFILENAME) ;
-	ofn.lpstrFilter       = szFilter ;
-	ofn.lpstrFile         = szFileName ;
-	ofn.nMaxFile          = MAX_PATH ;
-	ofn.lpstrFileTitle    = szTitleName ;
-	ofn.nMaxFileTitle     = MAX_PATH ;
-	ofn.lpfnHook		  = NULL;
-	ofn.Flags			  = OFN_ENABLEHOOK|OFN_EXPLORER|OFN_ENABLESIZING;
-
-	GetOpenFileName (&ofn);
-	if(ofn.lpstrFile[0] != 0){
-		if(filename != 0)
-			strcpy(filename, ofn.lpstrFile);
-	}
-}
+// void image_pick(char *filename)
+// {
+// 	static char szFilter[] = "Images (*.z64, *.v64, *.bin, *.rom,)\0*.z64;*.v64;*.bin;*.rom;\0All Files\0*.*;\0\0";
+// 	static char szFileName [MAX_PATH], szTitleName [MAX_PATH];
+// 	static OPENFILENAME ofn;
+// 	memset(&ofn, 0, sizeof (OPENFILENAME));
+// 
+// 	ofn.lStructSize       = sizeof (OPENFILENAME) ;
+// 	ofn.lpstrFilter       = szFilter ;
+// 	ofn.lpstrFile         = szFileName ;
+// 	ofn.nMaxFile          = MAX_PATH ;
+// 	ofn.lpstrFileTitle    = szTitleName ;
+// 	ofn.nMaxFileTitle     = MAX_PATH ;
+// 	ofn.lpfnHook		  = NULL;
+// 	ofn.Flags			  = OFN_ENABLEHOOK|OFN_EXPLORER|OFN_ENABLESIZING;
+// 
+// 	GetOpenFileName (&ofn);
+// 	if(ofn.lpstrFile[0] != 0){
+// 		if(filename != 0)
+// 			strcpy(filename, ofn.lpstrFile);
+// 	}
+// }
 
 void _printf(const char *format, ...)
 {
