@@ -41,6 +41,7 @@ Similarly to the Windows version, you will need some files from
   - ftd2xx.h
   - libftd2xx.a
   - WinTypes.h
+
 Copy these files into the project, then run ```make ```.
 
 ## Missing features
@@ -54,6 +55,13 @@ This port is missing two features from the original Windows version:
      I broke it.
      
      
+## Troubleshooting
+
+1. "Couldn't find device"
+
+You might have the open-source FTDI driver running, and that will conflict with FTDI's D2XX driver, which is used by this program. Check if the ftdi-sio module is loaded with the command ```lsmod | grep ftdi_sio``` and if it is, you can unload it with ```rmmod ftdi_sio```.
+
+
 ## License
 
 Retroactive says it is "BSD-licensed."
