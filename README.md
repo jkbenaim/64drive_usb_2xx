@@ -3,7 +3,7 @@
 (c) 2014 Retroactive
 ported to Linux by jkbenaim
 
-Update firmware and transfer data to/from your 64drive. Requires [FTDI's D2XX driver package](http://www.ftdichip.com/Drivers/D2XX.htm).
+Update firmware and transfer data to/from your 64drive. Requires [64drive firmware 2.X](http://64drive.retroactive.be/) and [FTDI's D2XX driver package](http://www.ftdichip.com/Drivers/D2XX.htm).
 
 ## Usage
 ```console
@@ -42,7 +42,7 @@ Similarly to the Windows version, you will need some files from
   - ftd2xx.h
   - libftd2xx.a
   - WinTypes.h
-Copy these files into the project, then run ```console make ```.
+Copy these files into the project, then run ```make ```.
 
 ## Missing features
 
