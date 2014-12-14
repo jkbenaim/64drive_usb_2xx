@@ -115,20 +115,20 @@ void parse_args(game_files_t *g, upgrade_files_t *u, int argc, char *argv[])
 			g->num_files ++;
 			mode |= MODE_SAVETYPE_BANK;
 			break;
-		case 'f':
-			if(n[i] < 1) die("Not enough arguments for parameter 'f'", __FUNCTION__);
-			mode |= MODE_UPGRADE_FIRM;
-			strcpy(u->files[u->num_files], a[i][0]);
-			u->firm[u->num_files] = 1;
-			u->num_files++;
-			break;
-		case 'b':
-			if(n[i] < 1) die("Not enough arguments for parameter 'b'", __FUNCTION__);
-			mode |= MODE_UPGRADE_BOOTLD;
-			strcpy(u->files[u->num_files], a[i][0]);
-			u->bootld[u->num_files] = 1;
-			u->num_files++;
-			break;
+// 		case 'f':
+// 			if(n[i] < 1) die("Not enough arguments for parameter 'f'", __FUNCTION__);
+// 			mode |= MODE_UPGRADE_FIRM;
+// 			strcpy(u->files[u->num_files], a[i][0]);
+// 			u->firm[u->num_files] = 1;
+// 			u->num_files++;
+// 			break;
+// 		case 'b':
+// 			if(n[i] < 1) die("Not enough arguments for parameter 'b'", __FUNCTION__);
+// 			mode |= MODE_UPGRADE_BOOTLD;
+// 			strcpy(u->files[u->num_files], a[i][0]);
+// 			u->bootld[u->num_files] = 1;
+// 			u->num_files++;
+// 			break;
 		case 'v':
 			usb.verbose = 1;
 			break;
@@ -164,8 +164,8 @@ void invalid_args()
 			printf("\t\t%d - %s", i, save_desc[i]);
 	}
 	printf("\n");
-	printf("    -b <file.rpk>\t\t   Update bootloader\n");
-	printf("    -f <file.rpk>\t\t   Update firmware\n");
+// 	printf("    -b <file.rpk>\t\t   Update bootloader\n");
+// 	printf("    -f <file.rpk>\t\t   Update firmware\n");
 	printf("    -v\t\t\t\t   Verbose output for debug\n");
 	exit(1);
 }

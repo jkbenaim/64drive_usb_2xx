@@ -17,8 +17,6 @@ Update firmware and transfer data to/from your 64drive. Requires [64drive firmwa
                2 - EEPROM 16k           3 - SRAM 256kbit
                4 - FlashRAM 1Mbit       5 - SRAM 768kbit (Dezaemon 3D)
                6 - FlashRAM 1Mbit (PokeStdm2)
-   -b <file.rpk>                  Update bootloader
-   -f <file.rpk>                  Update firmware
    -v                             Verbose output for debug
 
 1. Arguments: <required>, [optional]
@@ -46,10 +44,10 @@ Copy these files into the project, then run ```make ```.
 
 ## Missing features
 
-This port is missing just one feature from the original Windows version:
+This port is missing two features from the original Windows version:
 
-  1. The original Windows version has code for a filepicker. I don't
-     think it was actually used. I commented it out.
+  1. Can't update bootloader
+  2. Can't update firmware
      
      
 ## Troubleshooting
