@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -ldl -lpthread
+CFLAGS = -ggdb -Wall -ldl -lpthread
 
 SRC = 	device.c \
 	helper.c \
@@ -26,5 +26,5 @@ clean:
 	$(CC) $(OBJ) $(CFLAGS) libftd2xx.a -o 64drive_usb
 	
 %.o:%.c Makefile
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 	
