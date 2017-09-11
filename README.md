@@ -1,3 +1,8 @@
+DON'T USE THIS, USE https://github.com/RenaKunisaki/64drive-usb-linux/ INSTEAD.
+===============================================================================
+
+
+
 64drive USB loader for Linux
 ============================
 (c) 2014 Retroactive, ported to Linux by jkbenaim.
